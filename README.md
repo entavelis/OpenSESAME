@@ -1,6 +1,6 @@
 ## SESAME: Semantic Editing of Scenes by Adding, Manipulating or Erasing Objects
 
-[#Paper#](https://arxiv.org/abs/2004.04977) [#Video#](https://twitter.com/i/status/1249680641597362176)
+[Paper](https://arxiv.org/abs/2004.04977) [Video](https://twitter.com/i/status/1249680641597362176)
 
 ![SESAME teaser](teaser.png-1.png)
 
