@@ -4,7 +4,11 @@
 
 ![SESAME teaser](teaser.png-1.png)
 
-Code will be released soon!
+Please use the preprocessing steps of [Hierarchical Image Manipulation)[https://github.com/xcyan/neurips18_hierchical_image_manipulation] to prepare the dataset.
+
+You can find the pretrained models for the tasks of Image Editing and Layout to Image Generation [here](https://owncloud.csem.ch/owncloud/index.php/s/YD0JyynKNEbgde5)! 
+
+Use the files in the scripts folder to train/test the model.
 
 <pre><code>
 @misc{ntavelis2020sesame,
@@ -16,3 +20,8 @@ Code will be released soon!
     primaryClass={cs.CV}
 }
 </code></pre>
+
+We would like to thank the following repos, their code was essential in the developement of this project:
+
+- https://github.com/NVlabs/SPADE
+- https://github.com/xcyan/neurips18_hierchical_image_manipulation  
