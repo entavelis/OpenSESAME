@@ -14,7 +14,7 @@ import util.util as util
 class SesameMultiscaleDiscriminator(BaseNetwork):
     @staticmethod
     def modify_commandline_options(parser, is_train):
-        parser.add_argument('--netD_subarch', type=str, default='n_layer',
+        parser.add_argument('--netD_subarch', type=str, default='sesame_n_layer',
                             help='architecture of each discriminator')
         parser.add_argument('--num_D', type=int, default=2,
                             help='number of discriminators to be used in multiscale')
@@ -37,7 +37,7 @@ class SesameMultiscaleDiscriminator(BaseNetwork):
 
     def create_single_discriminator(self, opt, input_nc = None):
         subarch = opt.netD_subarch
-        if subarch == 'n_layer':
+        if subarch == 'sesame_n_layer':
             netD = SesameNLayerDiscriminator(opt, input_nc)
         else:
             raise ValueError('unrecognized discriminator subarchitecture %s' % subarch)
@@ -108,7 +108,6 @@ class SesameNLayerDiscriminator(BaseNetwork):
 
         sequence = branch[1]
         sequence += [[nn.Conv2d(nf, 1, kernel_size=kw, stride=1, padding=padw)]]
-        print(nf)
 
         # We divide the layers into groups to extract intermediate layer outputs
         self.img_sequence = nn.ModuleList()
@@ -123,8 +122,6 @@ class SesameNLayerDiscriminator(BaseNetwork):
         if not opt.no_instance:
             input_nc += 1
         if not opt.no_inpaint:
-            input_nc += 1
-        if opt.eraser_mode:
             input_nc += 1
             
         return input_nc

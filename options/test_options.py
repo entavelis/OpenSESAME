@@ -16,6 +16,10 @@ class TestOptions(BaseOptions):
         parser.add_argument('--niter', type=int, default=0, help='# of iter at starting learning rate. This is NOT the total #epochs. Totla #epochs is niter + niter_decay')
         parser.add_argument('--niter_decay', type=int, default=0, help='# of iter to linearly decay learning rate to zero')
 
+        #SESAME 
+        parser.add_argument('--addition', action='store_true', help='if specified, only sample image patches contain the same object for consistency')
+        parser.add_argument('--removal', action='store_true', help='if specified, only sample background patches')
+
         parser.set_defaults(preprocess_mode='scale_width_and_crop', crop_size=256, load_size=256, display_winsize=256)
         parser.set_defaults(serial_batches=True)
         parser.set_defaults(no_flip=True)

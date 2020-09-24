@@ -1,0 +1,1 @@
+python test.py --dataroot ./datasets/cityscapes --name cityscapes_final --dataset_mode cityscapesbox --gpu 0 --netG sesame --no_instance --no_skip_connections --batchSize 1 --mix_input_gen --nThreads 1 --bbox --segmentation_mask --removal 

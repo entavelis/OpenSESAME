@@ -19,7 +19,7 @@ class BaseDataset(data.Dataset):
         pass
 
 def get_transform_params(full_size, inst_info=None, class_of_interest=None, 
-                         config=None, bbox=None, random_crop=True, label_info = None, class_of_background=None):
+                         config=None, bbox=None, random_crop=True, label_info = None, class_of_background=None, test_addition=False):
     """Prepares the transform parameters (tight object window, soft object window,
         context window, & image window) for cropping.
     
@@ -52,7 +52,7 @@ def get_transform_params(full_size, inst_info=None, class_of_interest=None,
           crop_single_object(inst_info, class_of_interest, \
           orig_w, orig_h, config['prob_bg'], config['img_to_obj_ratio'],
           config['patch_to_obj_ratio'], min_box_size, max_box_size,
-          target_size, flip, random_crop, label_info = label_info, class_of_background = class_of_background)
+          target_size, flip, random_crop, label_info = label_info, class_of_background = class_of_background, test_addition = test_addition)
     else:
       # use the specified bounding box
       crop_pos, crop_object, bbox_in_context, bbox_cls, bbox_inst_id = \
@@ -95,10 +95,10 @@ def crop_single_object_with_bbox(bbox, w, h, img_to_obj_ratio,
 
 def crop_single_object(inst_info, class_of_interest, 
         w, h, prob_bg, img_to_obj_ratio, patch_to_obj_ratio, min_box_size,
-        max_box_size, target_size, flip, random_crop=True, label_info = None, class_of_background = None):
+        max_box_size, target_size, flip, random_crop=True, label_info = None, class_of_background = None, test_addition = False):
     """ compute cropping region (xmin, ymin, xmax, ymax) for single object """
     inst_info = inst_info['objects']
-    bbox_selected = sample_fg_from_full(inst_info, class_of_interest, min_box_size)
+    bbox_selected = sample_fg_from_full(inst_info, class_of_interest, min_box_size, test_addition)
     # sample random box
     sample_bg = random.random() < prob_bg
     if sample_bg or (bbox_selected is None):
@@ -147,7 +147,7 @@ def crop_box_with_margin(box, w, h, margin, random_crop=True):
     return crop_coord
 
 
-def sample_fg_from_full(inst_info, class_of_interest, min_box_size):
+def sample_fg_from_full(inst_info, class_of_interest, min_box_size, test_addition = False):
     """Sample one object from the full image.
 
     Args:
@@ -179,9 +179,11 @@ def sample_fg_from_full(inst_info, class_of_interest, min_box_size):
         candidate_list.append({
             'bbox': [xmin,ymin,xmax,ymax], 'cls': cls, 'inst_id': int(inst_idx)})
     if len(candidate_list) > 0:
-        rnd_bbox_idx = np.random.randint(len(candidate_list))
-        bbox_selected = candidate_list[rnd_bbox_idx]
-        bbox_selected = candidate_list[0]
+        if test_addition:
+            bbox_selected = candidate_list[0]
+        else:
+            rnd_bbox_idx = np.random.randint(len(candidate_list))
+            bbox_selected = candidate_list[rnd_bbox_idx]
         return bbox_selected
     else:
         return None

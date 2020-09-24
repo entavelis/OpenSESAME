@@ -20,7 +20,7 @@ class BaseOptions():
 
     def initialize(self, parser):
         # experiment specifics
-        parser.add_argument('--name', type=str, default='label2coco', help='name of the experiment. It decides where to store samples and models')
+        parser.add_argument('--name', type=str, default='sesame_test', help='name of the experiment. It decides where to store samples and models')
 
         parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are saved here')
@@ -56,12 +56,10 @@ class BaseOptions():
         parser.add_argument('--display_winsize', type=int, default=400, help='display window size')
 
         # for generator
-        parser.add_argument('--netG', type=str, default='spade', help='selects model to use for netG (pix2pixhd | spade)')
+        parser.add_argument('--netG', type=str, default='sesame', help='selects model to use for netG')
         parser.add_argument('--ngf', type=int, default=64, help='# of gen filters in first conv layer')
         parser.add_argument('--init_type', type=str, default='xavier', help='network initialization [normal|xavier|kaiming|orthogonal]')
         parser.add_argument('--init_variance', type=float, default=0.02, help='variance of the initialization distribution')
-        parser.add_argument('--z_dim', type=int, default=256,
-                            help="dimension of the latent z vector")
 
         # for instance-wise features
         parser.add_argument('--no_instance', action='store_true', help='if specified, do *not* add instance map as input')

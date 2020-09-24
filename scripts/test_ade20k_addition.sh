@@ -1,0 +1,1 @@
+python test.py --dataroot ./datasets/ade20k --name ade20k_final --dataset_mode ade20kbox --gpu_ids 0 --batchSize 1 --mix_input_gen --no_instance --bbox --no_skip_connection --addition

@@ -32,8 +32,8 @@ class Pix2PixTrainer():
                 self.pix2pix_model_on_one_gpu.create_optimizers(opt)
             self.old_lr = opt.lr
 
-        print(self.pix2pix_model_on_one_gpu.netG)
-        print(self.pix2pix_model_on_one_gpu.netD)
+        # print(self.pix2pix_model_on_one_gpu.netG)
+        # print(self.pix2pix_model_on_one_gpu.netD)
 
     def run_generator_one_step(self, data):
         self.optimizer_G.zero_grad()

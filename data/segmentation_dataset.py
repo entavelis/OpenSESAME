@@ -73,7 +73,17 @@ class SegmentationDataset(BaseDataset):
             opt.semantic_nc = 49 
             opt.load_image = True
             opt.min_box_size = 64 
+        
 
+        # ONLY TESTING: 
+        if not opt.isTrain:
+            # If we are testing addition we only want to sample patches containing foreground objects
+            if opt.addition:
+                opt.prob_bg = 0.0
+
+            # If we are testing removal we only want to sample patches containing background objects
+            if opt.removal:
+                opt.prob_bg = 1.0
 
         self.config = {
             'prob_flip': 0.0 if opt.no_flip else 0.5,
@@ -196,7 +206,8 @@ class SegmentationDataset(BaseDataset):
       params = get_transform_params(full_size, inst_info,
                                     self.class_of_interest, self.config,
                                     random_crop=self.opt.random_crop, label_info= raw_inputs['label'],
-                                    class_of_background=self.class_of_background)
+                                    class_of_background=self.class_of_background,
+                                    test_addition= (not self.opt.isTrain) and self.opt.addition) 
       outputs = self.preprocess_inputs(raw_inputs, params)
       if self.config['preprocess_option'] == 'select_region':
           outputs = self.preprocess_cropping(raw_inputs, outputs, params)

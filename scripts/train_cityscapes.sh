@@ -1,0 +1,1 @@
+python train.py --dataroot ./datasets/cityscapes --name cityscapes_new --dataset_mode cityscapesbox --gpu 0 --no_instance --no_skip_connections --batchSize 4 --mix_input_gen --nThreads 8 --bbox --segmentation_mask
