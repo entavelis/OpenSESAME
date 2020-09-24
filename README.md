@@ -4,10 +4,16 @@
 
 ![SESAME teaser](teaser.png-1.png)
 
-Please use the preprocessing steps of [Hierarchical Image Manipulation](https://github.com/xcyan/neurips18_hierchical_image_manipulation) to prepare the dataset.
+### Datasets
+Please use the preprocessing steps of [Hierarchical Image Manipulation](https://github.com/xcyan/neurips18_hierchical_image_manipulation) to prepare the datasets.
+
+Then, use a symbolic link (ln -s) or put them in the datasets folder. 
+
+### Pretrained Models
 
 You can find the pretrained models for the tasks of Image Editing and Layout to Image Generation [here](https://owncloud.csem.ch/owncloud/index.php/s/YD0JyynKNEbgde5)! 
 
+### Training/Testing Scripts
 Use the files in the scripts folder to train/test the model.
 
 <pre><code>
